@@ -31,9 +31,13 @@
 *.out
 *.app
 
-#others
+
+# dotenv environment variables file
+.env
+.env.test
+
+# Others
 .history
 .vscode
 *.dSYM/
 .DS_Store
-.env

@@ -7,3 +7,10 @@ services:
       - "80:80"
     # stdin_open: true
     # tty: true
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env

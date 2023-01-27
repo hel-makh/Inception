@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:55:47 by hel-makh          #+#    #+#              #
-#    Updated: 2023/01/25 11:54:43 by hel-makh         ###   ########.fr        #
+#    Updated: 2023/01/25 13:11:19 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,3 +27,5 @@ rmi:
 		sudo docker images -q | xargs sudo docker rmi -f
 
 fclean:	down rmi
+
+re:		fclean all

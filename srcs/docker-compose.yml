@@ -4,13 +4,12 @@ services:
     container_name: nginx
     build: ./requirements/nginx
     ports:
-      - "80:80"
-    # stdin_open: true
-    # tty: true
+      - "443:443"
+    restart: always
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
     ports:
       - "3306:3306"
     env_file:
-      - ../.env
+      - .env

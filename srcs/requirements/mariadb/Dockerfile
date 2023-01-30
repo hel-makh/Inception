@@ -4,6 +4,9 @@ LABEL       author hel-makh
 
 EXPOSE      3306
 
-COPY        tools/mysql_secure_installation.sh   /tmp/
+RUN         apt -y update\
+                && apt -y install mariadb-server
 
-ENTRYPOINT  ["/tmp/mysql_secure_installation.sh"]
+COPY        tools/mysql_secure_install.sh   /tmp/
+
+ENTRYPOINT  ["/tmp/mysql_secure_install.sh"]

@@ -1,12 +1,8 @@
 #!/bin/bash
 
-apt update
-
-apt install expect -y
-
-apt install mariadb-server -y
-
 service mariadb start
+
+apt -y install expect
 
 SECURE_MYSQL=$(expect -c "
     set timeout 10
@@ -34,8 +30,8 @@ SECURE_MYSQL=$(expect -c "
 
 echo "$SECURE_MYSQL"
 
-apt purge expect -y
-
 mysqladmin shutdown -uroot -p${MYSQL_ROOT_PASSWORD}
+
+apt -y purge expect
 
 mysqld_safe

@@ -6,6 +6,8 @@ services:
     ports:
       - "443:443"
     restart: always
+    env_file:
+      - .env
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb

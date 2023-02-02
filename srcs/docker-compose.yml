@@ -1,17 +1,43 @@
 version: '3'
+
 services:
   nginx:
-    container_name: nginx
     build: ./requirements/nginx
+    container_name: nginx
+    volumes:
+      - /home/hel-makh/data/wordpress:/var/www/html
     ports:
       - "443:443"
-    restart: always
+    networks:
+      - web-net
     env_file:
       - .env
+    restart: always
   mariadb:
-    container_name: mariadb
     build: ./requirements/mariadb
+    container_name: mariadb
     ports:
       - "3306:3306"
+    networks:
+      - web-net
     env_file:
       - .env
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress
+    volumes:
+      - /home/hel-makh/data/wordpress:/var/www/html
+    ports:
+      - "9000:9000"
+    networks:
+      - web-net
+    depends_on:
+      - mariadb
+      - nginx
+    env_file:
+      - .env
+
+networks:
+  web-net:
+    name: web-net
+    driver: bridge

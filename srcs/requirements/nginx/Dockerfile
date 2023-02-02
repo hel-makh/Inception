@@ -1,7 +1,5 @@
 FROM        debian:stable
 
-LABEL       author hel-makh
-
 EXPOSE      443
 
 ENV         DOMAIN_NAME=hel-makh.42.fr
@@ -13,7 +11,5 @@ RUN         apt -y update\
                     -out /etc/nginx/ssl/nginx-selfsigned.crt -subj "/C=MA/L=Khouribga/O=1337/CN=${DOMAIN_NAME}"
 
 COPY        conf/default  /etc/nginx/sites-available/default
-
-RUN         service nginx restart
 
 CMD         ["nginx", "-g", "daemon off;"]

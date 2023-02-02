@@ -30,8 +30,13 @@ SECURE_MYSQL=$(expect -c "
 
 echo "$SECURE_MYSQL"
 
-mysqladmin shutdown -uroot -p${MYSQL_ROOT_PASSWORD}
-
 apt -y purge expect
+
+mysql -u root -p$MYSQL_ROOT_PASSWORD <<EOF
+GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
+FLUSH PRIVILEGES;
+EOF
+
+mysqladmin shutdown -uroot -p${MYSQL_ROOT_PASSWORD}
 
 mysqld_safe

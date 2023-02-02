@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:55:47 by hel-makh          #+#    #+#              #
-#    Updated: 2023/01/30 18:59:18 by hel-makh         ###   ########.fr        #
+#    Updated: 2023/02/02 18:49:08 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,21 @@ build:
 up:
 		sudo docker-compose -f $(DOCKER_COMPOSE) up
 
-fclean:	down rmi
+clean:	down rmi rmv rmn
 
 down:
 		sudo docker-compose -f $(DOCKER_COMPOSE) down
 
 rmi:
 		sudo docker images -q | xargs sudo docker rmi -f
+
+rmv:
+		sudo docker volume ls -q | xargs sudo docker volume rm
+
+rmn:
+		sudo docker network ls -q | xargs sudo docker network rm 2>/dev/null
+
+fclean:	clean
+		sudo docker image prune -a
 
 re:		fclean all

@@ -2,6 +2,8 @@
 
 service mariadb start
 
+if [ $? -eq 0 ]; then
+
 apt -y install expect
 
 SECURE_MYSQL=$(expect -c "
@@ -40,3 +42,9 @@ EOF
 mysqladmin shutdown -uroot -p${MYSQL_ROOT_PASSWORD}
 
 mysqld_safe
+
+else
+
+exit
+
+fi

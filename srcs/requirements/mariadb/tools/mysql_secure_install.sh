@@ -4,8 +4,6 @@ service mariadb start
 
 if [ $? -eq 0 ]; then
 
-apt -y install expect
-
 SECURE_MYSQL=$(expect -c "
     set timeout 10
     spawn mysql_secure_installation
@@ -32,19 +30,17 @@ SECURE_MYSQL=$(expect -c "
 
 echo "$SECURE_MYSQL"
 
-apt -y purge expect
-
 mysql -u root -p$MYSQL_ROOT_PASSWORD <<EOF
 GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
 FLUSH PRIVILEGES;
 EOF
 
-mysqladmin shutdown -uroot -p${MYSQL_ROOT_PASSWORD}
+mysqladmin shutdown -uroot -p$MYSQL_ROOT_PASSWORD
 
 mysqld_safe
 
 else
 
-exit
+exit 1
 
 fi

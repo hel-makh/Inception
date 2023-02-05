@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:55:47 by hel-makh          #+#    #+#              #
-#    Updated: 2023/02/02 18:49:08 by hel-makh         ###   ########.fr        #
+#    Updated: 2023/02/04 13:23:42 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ build:
 up:
 		sudo docker-compose -f $(DOCKER_COMPOSE) up
 
-clean:	down rmi rmv rmn
+clean:	down rmi rmv
 
 down:
 		sudo docker-compose -f $(DOCKER_COMPOSE) down

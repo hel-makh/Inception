@@ -3,7 +3,7 @@ FROM        debian:stable
 EXPOSE      3306
 
 RUN         apt -y update\
-                && apt -y install mariadb-server
+                && apt -y install mariadb-server expect
                 
 COPY        conf/mariadb.cnf   /etc/mysql/mariadb.cnf
 

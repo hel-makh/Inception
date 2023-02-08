@@ -18,7 +18,7 @@ echo "$FTP_USER_PW"
 
 usermod -a -G www-data $FTP_USER
 
-chmod -R 775 /var/www/html
+chmod -R 775 /var/www/wordpress
 
 echo $FTP_USER | tee -a /etc/vsftpd.userlist
 

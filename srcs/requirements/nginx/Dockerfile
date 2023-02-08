@@ -1,6 +1,6 @@
 FROM        debian:stable
 
-EXPOSE      443
+EXPOSE      443 444
 
 ENV         DOMAIN_NAME=hel-makh.42.fr
 

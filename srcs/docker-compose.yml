@@ -17,9 +17,23 @@ services:
     build: ./requirements/wordpress
     container_name: wordpress
     volumes:
-      - wordpress-data:/var/www/html
+      - wordpress-data:/var/www/wordpress
     ports:
-      - "9000:9000"
+      - 9000:9000
+    networks:
+      - inception-net
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    restart: always
+  adminer:
+    build: ./requirements/bonus/adminer
+    container_name: adminer
+    volumes:
+      - adminer-data:/var/www/adminer
+    ports:
+      - 9001:9001
     networks:
       - inception-net
     depends_on:
@@ -31,13 +45,16 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     volumes:
-      - wordpress-data:/var/www/html
+      - wordpress-data:/var/www/wordpress
+      - adminer-data:/var/www/adminer
     ports:
-      - "443:443"
+      - 443:443
+      - 444:444
     networks:
       - inception-net
     depends_on:
       - wordpress
+      - adminer
     env_file:
       - .env
     restart: always
@@ -57,7 +74,7 @@ services:
     build: ./requirements/bonus/ftp
     container_name: ftp
     volumes:
-      - wordpress-data:/var/www/html
+      - wordpress-data:/var/www/wordpress
     ports:
       - 21:21
     networks:
@@ -79,6 +96,12 @@ volumes:
     driver: local
     driver_opts:
       device: /home/hel-makh/data/wordpress
+      o: bind
+      type: local
+  adminer-data:
+    driver: local
+    driver_opts:
+      device: /home/hel-makh/data/adminer
       o: bind
       type: local
 

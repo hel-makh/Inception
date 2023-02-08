@@ -17,4 +17,4 @@ RUN         apt -y update\
 
 COPY        conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
-CMD         php-fpm7.4 --nodaemonize
+CMD         ["/usr/sbin/php-fpm7.4", "--nodaemonize"]

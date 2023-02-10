@@ -8,7 +8,7 @@ RUN         apt -y update\
                     php\
                     php-mysql\
                     php-fpm\
-                    mariadb-client\
+                    default-mysql-client\
                 && service php7.4-fpm start\
                 && mkdir -p /var/www/adminer\
                 && wget https://www.adminer.org/latest.php -O /var/www/adminer/index.php\

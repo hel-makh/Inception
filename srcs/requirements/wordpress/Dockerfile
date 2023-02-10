@@ -16,7 +16,7 @@ RUN         apt -y update\
                     php-xml\
                     php-xmlrpc\
                     php-zip\
-                    mariadb-client\
+                    default-mysql-client\
                 && service php7.4-fpm start\
                 && curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar\
                 && chmod +x wp-cli.phar\

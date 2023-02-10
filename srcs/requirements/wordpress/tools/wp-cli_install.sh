@@ -29,7 +29,15 @@ define( 'WP_CACHE',          true );\n\
         sed -i "/$START_EDIT/a $REDIS_CONF" $WP_DIR$WP_CONF
     fi
 
-    wp --allow-root db create
+    while true; do
+        output=$(wp --allow-root db create 2>&1)
+        if [[ "$output" != *"Can't connect to MySQL server"* ]]; then
+            echo $output
+            break
+        fi
+        sleep 1
+    done
+
     wp --allow-root core install --url=10.12.100.85 --title=$WP_TITLE --admin_user=$WP_ADMIN --admin_password=$WP_ADMIN_PW --admin_email=$WP_ADMIN_EMAIL --skip-email
     # wp --allow-root core install --url=$DOMAIN_NAME --title=$WP_TITLE --admin_user=$WP_ADMIN --admin_password=$WP_ADMIN_PW --admin_email=$WP_ADMIN_EMAIL --skip-email
     wp --allow-root user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PW
